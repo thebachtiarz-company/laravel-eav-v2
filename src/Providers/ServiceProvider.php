@@ -30,6 +30,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot(): void
     {
-        //
+        if (! $this->app->runningInConsole()) {
+            return;
+        }
+
+        $publishName = 'thebachtiarz-eav';
+
+        $this->publishes([__DIR__ . '/../../database/migrations' => database_path('migrations')], "$publishName-migrations");
     }
 }
