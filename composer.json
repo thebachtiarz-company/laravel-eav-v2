@@ -1,0 +1,44 @@
+{
+    "name": "thebachtiarz-company/laravel-eav-v2",
+    "description": "Simple EAV module for Laravel project v2",
+    "type": "library",
+    "version": "0.0.1",
+    "require": {
+        "php": "^8.3",
+        "laravel/framework": "^11.20",
+        "filament/filament": "^3.2",
+        "thebachtiarz-company/laravel-base-v2": "*",
+        "thebachtiarz-company/laravel-admin-v2": "*"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "TheBachtiarz\\EAV\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "thebachtiarz-company",
+            "email": "thebachtiarz.company@gmail.com"
+        }
+    ],
+    "keywords": [
+        "laravel",
+        "thebachtiarz",
+        "eav"
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TheBachtiarz\\EAV\\Providers\\ServiceProvider"
+            ]
+        }
+    },
+    "homepage": "https://github.com/thebachtiarz-company/laravel-eav-v2",
+    "support": {
+        "issues": "https://github.com/thebachtiarz-company/laravel-eav-v2/issues",
+        "source": "https://github.com/thebachtiarz-company/laravel-eav-v2"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
