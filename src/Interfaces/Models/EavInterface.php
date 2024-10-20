@@ -28,7 +28,7 @@ interface EavInterface extends ModelInterface
     /**
      * Get model entity
      */
-    public function getModelEntity(): ModelInterface|Model;
+    public function getModelEntity(): ModelInterface|Model|null;
 
     /**
      * Get entity name

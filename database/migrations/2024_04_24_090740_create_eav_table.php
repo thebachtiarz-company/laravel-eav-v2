@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use TheBachtiarz\EAV\Interfaces\Models\EavInterface;
 use TheBachtiarz\EAV\Models\Eav;
 
-return new class () extends Migration {
+return new class extends Migration {
     /**
      * Run the migrations.
      */

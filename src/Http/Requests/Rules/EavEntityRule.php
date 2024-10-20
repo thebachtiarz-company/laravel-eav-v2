@@ -14,7 +14,7 @@ class EavEntityRule extends AbstractRule
         return [
             self::ENTITY => [
                 'required',
-                'alpha_num',
+                'regex:/^[a-zA-Z\\\\]+$/',
             ],
         ];
     }

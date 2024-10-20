@@ -2,7 +2,7 @@
     "name": "thebachtiarz-company/laravel-eav-v2",
     "description": "Simple EAV module for Laravel project v2",
     "type": "library",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "require": {
         "php": "^8.3",
         "laravel/framework": "^11.20",
@@ -40,5 +40,8 @@
         "source": "https://github.com/thebachtiarz-company/laravel-eav-v2"
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "require-dev": {
+        "laravel/pint": "^1.18"
+    }
 }

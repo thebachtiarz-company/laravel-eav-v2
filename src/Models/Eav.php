@@ -38,7 +38,7 @@ class Eav extends AbstractModel implements EavInterface
     public function model(): Attribute
     {
         return new Attribute(
-            get: fn(): ModelInterface => app($this->getEntityName())::find($this->getEntityId()),
+            get: fn(): ?ModelInterface => app($this->getEntityName())::withTrashed()->find($this->getEntityId()),
         );
     }
 
@@ -70,7 +70,7 @@ class Eav extends AbstractModel implements EavInterface
     /**
      * Get model entity
      */
-    public function getModelEntity(): ModelInterface|Model
+    public function getModelEntity(): ModelInterface|Model|null
     {
         return $this->{self::MODEL_ENTITY};
     }

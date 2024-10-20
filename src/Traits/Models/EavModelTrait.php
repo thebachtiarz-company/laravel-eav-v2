@@ -111,7 +111,6 @@ trait EavModelTrait
         return $eav ? static::eavRepository()->deleteByPrimaryKey($eav->getId()) : false;
     }
 
-    #[\Override]
     public function save(array $options = []): bool
     {
         assert($this instanceof ModelInterface || $this instanceof Model);
