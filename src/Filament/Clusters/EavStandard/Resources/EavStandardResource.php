@@ -40,25 +40,21 @@ class EavStandardResource extends Resource
                     Forms\Components\Group::make()->schema([
                         Forms\Components\TextInput::make(EavInterface::ATTRIBUTE_ENTITY)->label('Entity Type')->inlineLabel()
                             ->prefixIcon('heroicon-m-table-cells')
-                            ->rules(['required', 'string'])
                             ->rules(EavEntityRule::rules()[EavEntityRule::ENTITY])
                             ->live()
                             ->columnSpanFull(),
                         Forms\Components\TextInput::make(EavInterface::ATTRIBUTE_ENTITY_ID)->label('Entity ID')->inlineLabel()
                             ->prefixIcon('heroicon-m-key')
-                            ->rules(['required', 'alpha_num'])
                             ->rules(EavEntityIdRule::rules()[EavEntityIdRule::ENTITY_ID])
                             ->live()
                             ->columnSpanFull(),
                         Forms\Components\TextInput::make(EavInterface::ATTRIBUTE_NAME)->label('Attribute Name')->inlineLabel()
                             ->prefixIcon('heroicon-m-finger-print')
-                            ->rules(['required', 'string', 'alpha_dash:ascii'])
                             ->rules(EavNameRule::rules()[EavNameRule::NAME])
                             ->live()
                             ->columnSpanFull(),
                         Forms\Components\TextInput::make(EavInterface::ATTRIBUTE_VALUE)->label('Attribute Value')->inlineLabel()
                             ->prefixIcon('heroicon-m-document-text')
-                            ->rules(['required', 'string'])
                             ->rules(EavValueRule::rules()[EavValueRule::VALUE])
                             ->live()
                             ->columnSpanFull(),

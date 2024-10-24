@@ -14,7 +14,7 @@ class EavEntityIdRule extends AbstractRule
         return [
             self::ENTITY_ID => [
                 'required',
-                'string',
+                'alpha_num',
             ],
         ];
     }

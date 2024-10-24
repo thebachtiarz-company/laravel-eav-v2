@@ -96,6 +96,24 @@ trait EavModelTrait
     }
 
     /**
+     * Remove all eav belongs to entity
+     */
+    public function clearEav(): void
+    {
+        assert($this instanceof ModelInterface || $this instanceof Model);
+
+        if (!$this?->getId()) {
+            throw new BaseException(message: 'The model entity hasn\'t stored yet.', code: 404);
+        }
+
+        $repository = static::eavRepository();
+
+        $repository->getEntityAttributes($this);
+
+        $repository->modelBuilder()->delete();
+    }
+
+    /**
      * Delete eav from entity
      */
     public function deleteEav(string $attribute): bool
@@ -111,9 +129,12 @@ trait EavModelTrait
         return $eav ? static::eavRepository()->deleteByPrimaryKey($eav->getId()) : false;
     }
 
+    #[\Override]
     public function save(array $options = []): bool
     {
         assert($this instanceof ModelInterface || $this instanceof Model);
+
+        $this->beforeSave();
 
         $this->__tempEavAttributes = $this->{EavModelInterface::ATTRIBUTE_EAVS} ??= new Collection();
         unset($this->{EavModelInterface::ATTRIBUTE_EAVS});
@@ -135,8 +156,58 @@ trait EavModelTrait
             $this->withEav(fresh: true);
         }
 
+        $this->afterSave();
+
         return $process;
     }
+
+    #[\Override]
+    public function delete()
+    {
+        assert($this instanceof ModelInterface || $this instanceof Model);
+
+        $this->beforeDelete();
+
+        $execute = false;
+
+        try {
+            if ($this->isForceDeleting()) {
+                $execute = true;
+            }
+        } catch (\Throwable $th) {
+            $execute = true;
+        }
+
+        if ($execute) {
+            $this->clearEav();
+        }
+
+        $process = parent::delete();
+
+        $this->afterDelete();
+
+        return $process;
+    }
+
+    /**
+     * Observer save before
+     */
+    protected function beforeSave(): void {}
+
+    /**
+     * Observer save after
+     */
+    protected function afterSave(): void {}
+
+    /**
+     * Observer delete before
+     */
+    protected function beforeDelete(): void {}
+
+    /**
+     * Observer delete after
+     */
+    protected function afterDelete(): void {}
 
     /**
      * Initialize eav repository
