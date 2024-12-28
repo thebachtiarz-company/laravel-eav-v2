@@ -2,7 +2,7 @@
     "name": "thebachtiarz-company/laravel-eav-v2",
     "description": "Simple EAV module for Laravel project v2",
     "type": "library",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "require": {
         "php": "^8.3",
         "laravel/framework": "^11.20",

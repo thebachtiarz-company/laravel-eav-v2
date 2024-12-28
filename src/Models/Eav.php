@@ -154,7 +154,7 @@ class Eav extends AbstractModel implements EavInterface
     /**
      * Set attribute value
      */
-    public function setAttrValue(mixed $value): self
+    public function setAttrValue(mixed $value = null): self
     {
         $this->{self::ATTRIBUTE_VALUE} = $value;
 

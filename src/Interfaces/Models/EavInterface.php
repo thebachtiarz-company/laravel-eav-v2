@@ -75,5 +75,5 @@ interface EavInterface extends ModelInterface
     /**
      * Set attribute value
      */
-    public function setAttrValue(mixed $value): self;
+    public function setAttrValue(mixed $value = null): self;
 }

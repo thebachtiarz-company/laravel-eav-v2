@@ -40,23 +40,23 @@ class EavStandardResource extends Resource
                     Forms\Components\Group::make()->schema([
                         Forms\Components\TextInput::make(EavInterface::ATTRIBUTE_ENTITY)->label('Entity Type')->inlineLabel()
                             ->prefixIcon('heroicon-m-table-cells')
+                            ->required()
                             ->rules(EavEntityRule::rules()[EavEntityRule::ENTITY])
-                            ->live()
+                            ->disabledOn('edit')->dehydrated()
                             ->columnSpanFull(),
                         Forms\Components\TextInput::make(EavInterface::ATTRIBUTE_ENTITY_ID)->label('Entity ID')->inlineLabel()
                             ->prefixIcon('heroicon-m-key')
+                            ->required()
                             ->rules(EavEntityIdRule::rules()[EavEntityIdRule::ENTITY_ID])
-                            ->live()
+                            ->disabledOn('edit')->dehydrated()
                             ->columnSpanFull(),
                         Forms\Components\TextInput::make(EavInterface::ATTRIBUTE_NAME)->label('Attribute Name')->inlineLabel()
                             ->prefixIcon('heroicon-m-finger-print')
                             ->rules(EavNameRule::rules()[EavNameRule::NAME])
-                            ->live()
                             ->columnSpanFull(),
                         Forms\Components\TextInput::make(EavInterface::ATTRIBUTE_VALUE)->label('Attribute Value')->inlineLabel()
                             ->prefixIcon('heroicon-m-document-text')
                             ->rules(EavValueRule::rules()[EavValueRule::VALUE])
-                            ->live()
                             ->columnSpanFull(),
                     ])->columns(12)->columnStart(['sm' => 'full', 'md' => 2])->columnSpan(['sm' => 'full', 'md' => 10]),
                 ])->columns(12)->columnSpanFull(),
@@ -66,9 +66,10 @@ class EavStandardResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->groups([
+            ->deferLoading()
+            ->defaultGroup(
                 Tables\Grouping\Group::make(EavInterface::ATTRIBUTE_ENTITY)->label('Entity')->collapsible(),
-            ])
+            )
             ->defaultGroup(EavInterface::ATTRIBUTE_ENTITY)
             ->columns([
                 Tables\Columns\TextColumn::make(EavInterface::ATTRIBUTE_ENTITY)->label('Entity')
@@ -89,9 +90,6 @@ class EavStandardResource extends Resource
                     ->fontFamily(FontFamily::Mono)
                     ->dateTime(timezone: config('app.timezone')),
             ])
-            ->filters([
-                //
-            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
@@ -100,7 +98,8 @@ class EavStandardResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->searchable(false);
     }
 
     public static function getRelations(): array
